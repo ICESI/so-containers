@@ -42,6 +42,9 @@ Es posible instalar el rpm de jailkit directamente, sin embargo a continuación 
 # jk_jailuser -m -j /home/jail jane
 # mkdir /home/jail/tmp
 # chmod a+rwx /home/jail/tmp
+# vi /home/jail/etc/passwd
+root:x:0:0:root:/root:/bin/bash
+jane:x:1004:1004::/home/jane:/bin/bash
 ```
 
 #### Usando chroot
