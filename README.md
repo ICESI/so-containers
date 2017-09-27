@@ -359,35 +359,41 @@ Busque nuevamente los PIDs de los procesos en el archivo tasks
 # cat tasks | grep -E "4296|4361"
 ```
 
-Ejecute el siguiente script en la consola con PID 4296. Tenga en cuenta ejecutar el código en modo background dos veces y anotar los PID:
+Ejecute el siguiente script en la consola con PID 4296. Tenga en cuenta ejecutar el código en modo background una vez y anotar los PID:
 ```
 # cd /tmp
 # vi consume_cpu.sh
 
 #!/bin/bash
-while True; do sleep 2; done
+a=0
+while true; do a=a+1; done
 ```
 
-Ingrese al directorio /sys/fs/cgroup/cpuset/group_01 y liste el contenido del archivo tasks
+Las siguientes indicaciones asumen que se obtuvo como PID el número 1405
+
+Ingrese al directorio /sys/fs/cgroup/cpuset/group_01 y liste el contenido del archivo tasks. Busque en el contenido el PID con número 1405
 ```
 # cd /sys/fs/cgroup/cpuset/group_01
 # cat tasks
 ```
 
-Observe por medio del comando top el uso de la cpu, en este caso el uso del núcleo 0
+Observe por medio del comando top en una consola el uso de la cpu, en este caso el uso del núcleo 0
 ```
 # top
 ```
 
-Migre uno de los procesos del grupo de control 1 al group de control 2. En el caso que el grupo de control tenga un proceso
-con PID igual a 22283
+Migre el proceso con PID 1405 del grupo de control 1 al grupo de control 2
 ```
-# echo 22283 >group_02/tasks
+# echo 1405 >group_02/tasks
 ```
 
-#### LXC
-LXC es ...  
-LXD es ...
+Verifique con top que el proceso se ha migrado de procesador
+```
+# top
+```
+
+#### LXC/LXD
+LXC es una tecnología de virtualización ...
 
 #### Kernel Capabilities, SELinux y AppArmor
 El demonio de docker requiere de privilegios de root para su ejecución, por lo tanto hay recomendaciones que se deben tener en cuenta para reducir los vectores de vulnerabilidades al emplear tecnologías de contenedores virtuales.
