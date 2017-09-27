@@ -402,6 +402,10 @@ proyectos similares en curso, como por ejemplo rocket de CoreOS.
 
 **Nota:** Es posible emplear docker con LXC iniciando el demonio de docker con el comando **docker -e -x lxc**
 
+### Actividades
+
+* Investigue en que consiste una bomba fork **:(){ :|: & };:** y como prevenirla usando las herramientas vistas en esta guía.
+
 ### Referencias
 http://linuxpitstop.com/chroot-ssh-users-on-centos-7/  
 http://www.tldp.org/pub/Linux/docs/ldp-archived/system-admin-guide/translations/es/html/ch05s02.html  
