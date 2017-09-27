@@ -25,6 +25,7 @@ Es posible instalar el rpm de jailkit directamente, sin embargo a continuación 
 
 ```console
 # yum install wget -y
+# yum install bzip2 -y
 # cd /tmp
 # wget http://repo.iotti.biz/CentOS/7/srpms/jailkit-2.17-1.el7.lux.1.src.rpm
 # rpm2cpio jailkit-2.17-1.el7.lux.1.src.rpm | cpio -idmv
