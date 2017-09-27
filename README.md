@@ -62,12 +62,18 @@ PasswordAuthentication yes
 
 Reinicie el servicio de ssh
 ```
-systemctl restart sshd
+# systemctl restart sshd
 ```
 
 Realice una conexión remota como el usuario jane
 ```
-ssh jane@127.0.0.1
+# ssh jane@127.0.0.1
+```
+
+Una vez haya accedido con ssh, observe los archivos y directorios en la raíz
+```
+$ cd /
+$ ls -al
 ```
 
 **Nota**: Los entornos **chroot** no deben ser diseñados para aislar al usuario root. 
