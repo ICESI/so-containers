@@ -377,7 +377,7 @@ Ingrese al directorio /sys/fs/cgroup/cpuset/group_01 y liste el contenido del ar
 # cat tasks
 ```
 
-Observe por medio del comando top en una consola el uso de la cpu, en este caso el uso del núcleo 0
+Observe por medio del comando top en una consola el uso de la cpu, en este caso el uso del núcleo 0. En la interfaz de top presione '1' para visualizar los núcleos del procesador y presion 't' para visualizar las tareas por núcleo.
 ```
 # top
 ```
