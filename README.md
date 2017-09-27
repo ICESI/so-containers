@@ -404,7 +404,12 @@ proyectos similares en curso, como por ejemplo rocket de CoreOS.
 
 ### Actividades
 
-* Investigue en que consiste una bomba fork **:(){ :|: & };:** y como prevenirla usando las herramientas vistas en esta guía.
+* Investigue en que consiste una bomba fork y como prevenirla usando las herramientas vistas en esta guía.
+
+**Nota:** NO ejecute este comando en una consola hasta investigar primero que hace
+```
+# :(){ :|: & };:
+```
 
 ### Referencias
 http://linuxpitstop.com/chroot-ssh-users-on-centos-7/  
