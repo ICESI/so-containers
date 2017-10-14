@@ -407,6 +407,126 @@ LXC permite ejecutar diferentes sistemas Linux (contenedores) aislados en una m�
 
 LXD adiciona características sobre LXC tales como una interfaz REST para la gestión de contenedores a través de la red y soporte nativo para OpenStack. Los comandos para interactuar con lxd tienen el formato lxc <command>
 
+Crear el siguiente script install_lxd.sh y ejecutarlo desde un usuario con privilegios
+```
+#!/bin/sh
+
+USER_ADDED_TO_LXD_GROUP="${USER}"
+
+# LXD/LXC uses lxc-xxx pakcage.
+F=https://dl.fedoraproject.org/pub/fedora/linux/releases/25
+L=${F}/Everything/source/tree/Packages/l
+yum install -y wget
+wget -q ${L}/lxc-2.0.5-1.fc25.src.rpm
+sudo yum install -y epel-release rpmdevtools rpm-build graphviz libacl-devel 
+sudo yum-builddep -y lxc-2.0.5-1.fc25.src.rpm
+rpmbuild --rebuild lxc-2.0.5-1.fc25.src.rpm
+
+# Install package.
+# shellcheck disable=SC2046
+sudo yum localinstall -y \
+     $(find ~/rpmbuild/RPMS -type f -a ! -name "*debuginfo*")
+
+# Install LXD/LXC.
+sudo adduser --system lxd --home /var/lib/lxd/ --shell /bin/false
+sudo addgroup --system lxd
+sudo mkdir -p /var/log/lxd
+sudo chown root:lxd /var/log/lxd
+sudo yum install -y git golang sqlite-devel dnsmasq squashfs-tools
+export GOPATH=${HOME}/go
+export PATH=${GOPATH}/bin/:${PATH}
+go get -v -x -tags libsqlite3 \
+   github.com/lxc/lxd/lxc \
+   github.com/lxc/lxd/lxd
+sudo cp "${GOPATH}"/bin/* /usr/bin/
+
+# Create systemd service and socket.
+sudo su -c '
+cat <<EOF > /usr/lib/systemd/system/lxd.service
+[Unit]
+Description=LXD - main daemon
+After=network.target
+Requires=network.target lxd.socket
+Documentation=man:lxd(1)
+
+[Service]
+EnvironmentFile=-/etc/environment
+ExecStart=/usr/bin/lxd --group lxd --logfile=/var/log/lxd/lxd.log
+ExecStartPost=/usr/bin/lxd waitready --timeout=600
+KillMode=process
+TimeoutStartSec=600
+TimeoutStopSec=40
+Restart=on-failure
+LimitNOFILE=infinity
+LimitNPROC=infinity
+
+[Install]
+Also=lxd.socket
+EOF
+'
+
+sudo su -c '
+cat <<EOF > /usr/lib/systemd/system/lxd.socket
+[Unit]
+Description=LXD - unix socket
+Documentation=man:lxd(1)
+
+[Socket]
+ListenStream=/var/lib/lxd/unix.socket
+SocketGroup=lxd
+SocketMode=0660
+Service=lxd.service
+
+[Install]
+WantedBy=sockets.target
+EOF
+'
+
+# Run LXD for initialization.
+sudo systemctl --system daemon-reload
+sudo systemctl enable lxd
+sudo systemctl start lxd
+
+# Initialize LXD.
+cat <<EOF | sudo lxd init
+yes
+default
+dir
+no
+yes
+yes
+lxdbr0
+auto
+auto
+EOF
+
+# Running container needs user_namespace.enable=1.
+sudo yum install -y grub2-tools
+. /etc/default/grub
+V="$GRUB_CMDLINE_LINUX user_namespace.enable=1"
+sudo sed -e "s;^GRUB_CMDLINE_LINUX=.*;GRUB_CMDLINE_LINUX=\"$V\";g" \
+-i /etc/default/grub
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+
+# Add user to lxd for running lxc command without privilege.
+sudo gpasswd -a "${USER_ADDED_TO_LXD_GROUP}" lxd
+
+# Reboot.
+sudo reboot
+```
+
+Ejecutar los comandos
+```
+$ lxc launch ubuntu:16.04 ubuntu-1604
+$ lxc exec ubuntu-1604 -- find /lib/systemd/system -maxdepth 1 \
+-type f -exec sed -e 's/umount\.target//g' -i {} \;
+$ lxc exec ubuntu-1604 -- systemctl --system daemon-reload
+$ lxc exec ubuntu-1604 reboot
+$ uname -a
+$ lxc exec ubuntu-1604 -- uname -a 
+```
+
+
 #### Kernel Capabilities, SELinux y AppArmor
 El demonio de docker requiere de privilegios de root para su ejecución, por lo tanto hay recomendaciones que se deben tener en cuenta para reducir los vectores de vulnerabilidades al emplear tecnologías de contenedores virtuales.
 
