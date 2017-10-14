@@ -403,7 +403,9 @@ Verifique con top que el proceso se ha migrado de procesador
 ```
 
 #### LXC/LXD
-LXC es una tecnología de virtualización ...
+LXC permite ejecutar diferentes sistemas Linux (contenedores) aislados en una máquina Linux. Un contenedor es como un entorno virtual, con su propio espacio de procesos y de red. La tecnología LXC utiliza Linux kernel control groups (Cgroups) y Namespaces (espacios de nombres) para proporcionar este aislamiento. Un contenedor tiene su propia visión del sistema operativo, del espacio de IDs de procesos, de la estructura del sistema de ficheros, y de los interfaces de red. Los comandos para interactuar con lxc tienen el formato lxc-<command>
+
+LXD adiciona características sobre LXC tales como una interfaz REST para la gestión de contenedores a través de la red y soporte nativo para OpenStack. Los comandos para interactuar con lxd tienen el formato lxc <command>
 
 #### Kernel Capabilities, SELinux y AppArmor
 El demonio de docker requiere de privilegios de root para su ejecución, por lo tanto hay recomendaciones que se deben tener en cuenta para reducir los vectores de vulnerabilidades al emplear tecnologías de contenedores virtuales.
@@ -448,6 +450,10 @@ https://elpuig.xeill.net/Members/vcarceler/articulos/introduccion-a-los-grupos-d
 http://www.itzgeek.com/how-tos/linux/centos-how-tos/setup-linux-container-with-lxc-on-centos-7-rhel-7.html
 https://www.hiroom2.com/2017/03/24/centos-7-run-containers-with-lxd-lxc/
 https://github.com/fgrehm/vagrant-lxc
+https://www.jpablo128.com/por-que-usar-lxc-linux-containers/
+https://linuxcontainers.org/lxd/
+https://www.openstack.org/
+https://discuss.linuxcontainers.org/t/comparing-lxd-vs-lxc/24
 
 https://medium.com/@tiffanyfayj/docker-1-11-et-plus-engine-is-now-built-on-runc-and-containerd-a6d06d7e80ef
 https://godoc.org/github.com/opencontainers/runc/libcontainer
