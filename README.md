@@ -515,7 +515,7 @@ sudo gpasswd -a "${USER_ADDED_TO_LXD_GROUP}" lxd
 sudo reboot
 ```
 
-Ejecutar los comandos
+Ejecutar los comandos y verificar que es posible crear un contenedor con Ubuntu 16.04
 ```
 $ lxc launch ubuntu:16.04 ubuntu-1604
 $ lxc exec ubuntu-1604 -- find /lib/systemd/system -maxdepth 1 \
@@ -525,7 +525,6 @@ $ lxc exec ubuntu-1604 reboot
 $ uname -a
 $ lxc exec ubuntu-1604 -- uname -a 
 ```
-
 
 #### Kernel Capabilities, SELinux y AppArmor
 El demonio de docker requiere de privilegios de root para su ejecución, por lo tanto hay recomendaciones que se deben tener en cuenta para reducir los vectores de vulnerabilidades al emplear tecnologías de contenedores virtuales.
