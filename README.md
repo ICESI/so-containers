@@ -454,6 +454,9 @@ https://www.jpablo128.com/por-que-usar-lxc-linux-containers/
 https://linuxcontainers.org/lxd/
 https://www.openstack.org/
 https://discuss.linuxcontainers.org/t/comparing-lxd-vs-lxc/24
+https://linuxcontainers.org/lxd/getting-started-cli/
+https://www.ctl.io/developers/blog/post/linux-lxd-hypervisor-containers
+http://www.zdnet.com/article/ubuntu-lxd-not-a-docker-replacement-a-docker-enhancement/
 
 https://medium.com/@tiffanyfayj/docker-1-11-et-plus-engine-is-now-built-on-runc-and-containerd-a6d06d7e80ef
 https://godoc.org/github.com/opencontainers/runc/libcontainer
