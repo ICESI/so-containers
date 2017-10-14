@@ -539,6 +539,9 @@ proyectos similares en curso, como por ejemplo rocket de CoreOS.
 
 **Nota:** Es posible emplear docker con LXC iniciando el demonio de docker con el comando **docker -e -x lxc**
 
+#### Hypervisores
+Es posible ejecutar contenedores de docker o rocket de forma nativa sobre un sistema operativo anfitrión ó tambien sobre hypervisores tipo 1 (nativo, unhosted o bare metal) ó tipo 2 (hosted)
+
 ### Actividades
 
 * Investigue en que consiste una bomba fork y como prevenirla usando las herramientas vistas en esta guía.
@@ -585,3 +588,5 @@ https://github.com/opencontainers/runc/tree/master/libcontainer
 https://sysdig.com/blog/monitoring-greedy-containers-part-1/
 
 https://lwn.net/Articles/676831/
+
+https://www.ibm.com/developerworks/community/blogs/powermeup/entry/Docker_Virtualization_and_Hypervisors?lang=en
