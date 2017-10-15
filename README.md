@@ -526,6 +526,12 @@ $ uname -a
 $ lxc exec ubuntu-1604 -- uname -a 
 ```
 
+Para entrar al contenedor
+```
+lxc exec ubuntu-1604 bash
+# exit
+```
+
 Para obtener información del contenedor 
 ```
 $ lxc info ubuntu-1604
@@ -565,7 +571,13 @@ $ cat /sys/fs/cgroup/pids/lxc/ubuntu-1604/pids.max
 max
 ```
 
-Para contener una bomba fork
+Método directo para modificar los valores empleados anteriormente
+```
+$ lxc config set ubuntu-1604 limits.processes 1000
+$ lxc config unset ubuntu-1604 limits.processes
+```
+
+Es posible comprobar la efectividad de ajustar un límite a la cantidad de procesos que se pueden crear en el contenedor LXC/LXD a través de una bomba fork
 ```
 $ sudo su -c 'echo "1000" >> /sys/fs/cgroup/pids/lxc/ubuntu-1604/pids.max'
 $ cat /sys/fs/cgroup/pids/lxc/ubuntu-1604/pids.max
@@ -575,17 +587,6 @@ Processes: 26
 $ lxc exec ubuntu-1604 -- perl -e 'fork while fork' \&
 $ lxc info ubuntu-1604 | grep Processes
 Processes: 26
-```
-
-Método directo para modificar los valores empleados anteriormente
-```
-$ lxc config set ubuntu-1604 limits.processes 1000
-$ lxc config unset ubuntu-1604 limits.processes
-```
-
-Para entrar al contenedor
-```
-lxc exec ubuntu-1604 bash
 ```
 
 #### Kernel Capabilities, SELinux y AppArmor
