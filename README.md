@@ -563,6 +563,7 @@ Para obtener el número máximo de procesos que se pueden ejecutar en el contene
 ```
 $ cat /sys/fs/cgroup/pids/lxc/ubuntu-1604/pids.max 
 max
+```
 
 Para contener una bomba fork
 ```
@@ -574,6 +575,17 @@ Processes: 26
 $ lxc exec ubuntu-1604 -- perl -e 'fork while fork' \&
 $ lxc info ubuntu-1604 | grep Processes
 Processes: 26
+```
+
+Método directo para modificar los valores empleados anteriormente
+```
+$ lxc config set ubuntu-1604 limits.processes 1000
+$ lxc config unset ubuntu-1604 limits.processes
+```
+
+Para entrar al contenedor
+```
+lxc exec ubuntu-1604 bash
 ```
 
 #### Kernel Capabilities, SELinux y AppArmor
