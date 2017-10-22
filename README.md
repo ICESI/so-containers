@@ -11,7 +11,7 @@ Correo: daniel.barragan at correo.icesi.edu.co
 * Crear entornos aislados para la ejecución de procesos a nivel del sistema operativo
 
 ### Introducción
-En esta guía se introducen conceptos acerca de la tecnología de contenedores virtuales y sus fundamentos. Además se presentan 
+En esta guía se introducen conceptos acerca de la tecnología de contenedores virtuales y sus fundamentos. Además se presentan
 ejemplos a través de los cuales se podrá experimentar con cada una de dichas tecnologías. La información presentada es resultado de la recopilación de distintas fuentes de información, las referencias se presentan al final de la guía.
 
 ### Desarrollo
@@ -19,7 +19,7 @@ ejemplos a través de los cuales se podrá experimentar con cada una de dichas t
 #### Chroot
 **chroot** en los sistemas operativos derivados de Unix, es una operación que invoca un proceso, cambiando para este y sus hijos el directorio raíz del sistema. El sistema chroot fue introducido por Bill Joy el 18 de marzo de 1982.
 
-La creación de un ambiente aislado con **chroot** implica varios pasos. En esta guía se empleará la herramienta jailkit que automatiza varios de los pasos para crear entornos **chroot** 
+La creación de un ambiente aislado con **chroot** implica varios pasos. En esta guía se empleará la herramienta jailkit que automatiza varios de los pasos para crear entornos **chroot**
 
 Es posible instalar el rpm de jailkit directamente, sin embargo a continuación se presentan los pasos para la instalación desde las fuentes
 
@@ -33,7 +33,7 @@ Es posible instalar el rpm de jailkit directamente, sin embargo a continuación 
 # cd jailkit-2.17/
 # ./configure
 # make
-# make install 
+# make install
 
 # adduser jane
 # mkdir /home/jail
@@ -76,14 +76,14 @@ $ cd /
 $ ls -al
 ```
 
-**Nota**: Los entornos **chroot** no deben ser diseñados para aislar al usuario root. 
+**Nota**: Los entornos **chroot** no deben ser diseñados para aislar al usuario root.
 
 #### Escapando de chroot
 
 A continuación se demuestra como el usuario root puede **escapar** del ambiente aislado chroot.
 
 Existen versiones de esta prueba en lenguaje C, para lo cual se requiere que en el entorno chroot se haya instalado
-el compilador de C. Esta versión usa el lenguaje perl, por tanto se requiere que la **victima** al haber creado el entorno de chroot, haya realizado la instalación de perl. 
+el compilador de C. Esta versión usa el lenguaje perl, por tanto se requiere que la **victima** al haber creado el entorno de chroot, haya realizado la instalación de perl.
 
 Ejecute el siguiente comando para simular que se cuenta con el compilador de perl en el ambiente chroot
 ```
@@ -154,7 +154,7 @@ FreeBSD es un sistema operativo open-source y descendiente directo de BSD (Berke
 
 Las jaulas son un mecanismo de seguridad y una implementación para dar soporte a la virtualización. Es una mejora al método tradicional de chroot que aparece en la versión 4 de FreeBSD. Un proceso que se ejecuta en una jaula no puede acceder a recursos
 por fuera de ella. Cada jaula tiene su propio hostname y dirección IP. Es posible ejecutar varias jaulas a la vez pero estas se ejecutan sobre el mismo kernel, por tanto solo se pueden ejecutar en ellas software soportado por el kernel de FreeBSD.
- 
+
 #### Namespaces
 
 La tecnología de namespaces permite crear a partir de recursos globales del sistema, abstracciones de dichos recursos que pueden
@@ -170,7 +170,7 @@ Linux tiene los siguientes namespaces:
 | Network | CLONE_NEWNET | Network devices, stacks, ports, etc. |  
 | Mount | CLONE_NEWNS | Mount points |  
 | PID | CLONE_NEWPID | Process IDs |  
-| User | CLONE_NEWUSER | User and group IDs  | 
+| User | CLONE_NEWUSER | User and group IDs  |
 | UTS | CLONE_NEWUTS | Hostname and NIS domain name |  
 
 La API de namespaces incluye las llamadas al sistema: clone, setns, unshare  
@@ -305,7 +305,7 @@ int main() {
 }
 ```
 
-Para proveer al namespace con una interfaz de red usable se requiere la creación de interfaces de red virtuales dentro del namespace y mecanismos de enrutamiento para direccionar los datos de la interfaz física del sistema operativo hacia las interfaces virtuales. La configuración de puentes ethernet permite la conexión entre namespaces. 
+Para proveer al namespace con una interfaz de red usable se requiere la creación de interfaces de red virtuales dentro del namespace y mecanismos de enrutamiento para direccionar los datos de la interfaz física del sistema operativo hacia las interfaces virtuales. La configuración de puentes ethernet permite la conexión entre namespaces.
 
 #### Cgroups
 Control Groups (CGroups) fue introducido por Google en el 2006 para restringir lor recursos usados por un proceso, fue mezclado (merge) en el código del kernel de Linux en la versión 2.6.24. Todos los recursos que un proceso puede usar tiene su propio controlador de recursos (CGroup Subsystem)
@@ -359,8 +359,8 @@ Las siguientes indicaciones asumen que se obtuvo como PIDs los números 4296 y 4
 
 Asigne los procesos a cada grupo creado
 ```
-# echo 4296 >group_01/tasks 
-# echo 4361 >group_02/tasks 
+# echo 4296 >group_01/tasks
+# echo 4361 >group_02/tasks
 ```
 
 Busque nuevamente los PIDs de los procesos en el archivo tasks
@@ -418,7 +418,7 @@ F=https://dl.fedoraproject.org/pub/fedora/linux/releases/25
 L=${F}/Everything/source/tree/Packages/l
 yum install -y wget
 wget -q ${L}/lxc-2.0.5-1.fc25.src.rpm
-sudo yum install -y epel-release rpmdevtools rpm-build graphviz libacl-devel 
+sudo yum install -y epel-release rpmdevtools rpm-build graphviz libacl-devel
 sudo yum-builddep -y lxc-2.0.5-1.fc25.src.rpm
 rpmbuild --rebuild lxc-2.0.5-1.fc25.src.rpm
 
@@ -523,7 +523,7 @@ $ lxc exec ubuntu-1604 -- find /lib/systemd/system -maxdepth 1 \
 $ lxc exec ubuntu-1604 -- systemctl --system daemon-reload
 $ lxc exec ubuntu-1604 reboot
 $ uname -a
-$ lxc exec ubuntu-1604 -- uname -a 
+$ lxc exec ubuntu-1604 -- uname -a
 ```
 
 Para entrar al contenedor
@@ -532,7 +532,7 @@ lxc exec ubuntu-1604 bash
 # exit
 ```
 
-Para obtener información del contenedor 
+Para obtener información del contenedor
 ```
 $ lxc info ubuntu-1604
 Name: ubuntu-1604
@@ -552,7 +552,7 @@ $ cat /proc/meminfo
 
 En el directorio /proc/cgroups se encuentran los controladores definidos en el kernel, por ejemplo el controlador **cpuset**.
 ```
-$ cat /proc/cgroups 
+$ cat /proc/cgroups
 ```
 
 Para obtener información de los cgroups para el contenedor LXC/LXD
@@ -565,9 +565,9 @@ El directorio **/sys** permite manipular datos del kernel
 $ mount | grep cgroup
 ```
 
-Para obtener el número máximo de procesos que se pueden ejecutar en el contenedor 
+Para obtener el número máximo de procesos que se pueden ejecutar en el contenedor
 ```
-$ cat /sys/fs/cgroup/pids/lxc/ubuntu-1604/pids.max 
+$ cat /sys/fs/cgroup/pids/lxc/ubuntu-1604/pids.max
 max
 ```
 
@@ -604,6 +604,11 @@ proyectos similares en curso, como por ejemplo rocket de CoreOS.
 
 #### Hypervisores
 Es posible ejecutar contenedores de docker o rocket de forma nativa sobre un sistema operativo anfitrión ó tambien sobre hypervisores tipo 1 (nativo, unhosted o bare metal) ó tipo 2 (hosted)
+
+#### Virtualización (state of art)
+
+![][1]
+**Figura 1.** Estado del arte en virtualización
 
 ### Actividades
 
@@ -653,3 +658,5 @@ https://sysdig.com/blog/monitoring-greedy-containers-part-1/
 https://lwn.net/Articles/676831/
 
 https://www.ibm.com/developerworks/community/blogs/powermeup/entry/Docker_Virtualization_and_Hypervisors?lang=en
+
+[1]: images/modern_virtualization.png
