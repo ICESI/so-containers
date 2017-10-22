@@ -607,7 +607,7 @@ Es posible ejecutar contenedores de docker o rocket de forma nativa sobre un sis
 
 #### Virtualización (state of art)
 
-![][1]
+![][1]  
 **Figura 1.** Estado del arte en virtualización
 
 ### Actividades
