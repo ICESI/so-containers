@@ -146,6 +146,11 @@ lxc exec ubuntu-1604 bash
 # exit
 ```
 
+Es posible obtener una imagen de CentOS 7, puede consultar las imágenes disponibles en https://us.images.linuxcontainers.org/
+```
+lxc launch images:centos/7/amd64 centos-7
+```
+
 Para obtener información del contenedor
 ```
 $ lxc info ubuntu-1604
@@ -234,14 +239,19 @@ Es posible ejecutar contenedores de docker o rocket de forma nativa sobre un sis
 ```
 
 ### Referencias
+
+#### Tutoriales oficiales Ubuntu
+https://linuxcontainers.org/lxd/getting-started-cli/  
+https://linuxcontainers.org/lxd/
+
+#### Otras referencias
 http://www.itzgeek.com/how-tos/linux/centos-how-tos/setup-linux-container-with-lxc-on-centos-7-rhel-7.html
 https://www.hiroom2.com/2017/03/24/centos-7-run-containers-with-lxd-lxc/
 https://github.com/fgrehm/vagrant-lxc
 https://www.jpablo128.com/por-que-usar-lxc-linux-containers/
-https://linuxcontainers.org/lxd/
+
 https://www.openstack.org/
 https://discuss.linuxcontainers.org/t/comparing-lxd-vs-lxc/24
-https://linuxcontainers.org/lxd/getting-started-cli/
 https://www.ctl.io/developers/blog/post/linux-lxd-hypervisor-containers
 http://www.zdnet.com/article/ubuntu-lxd-not-a-docker-replacement-a-docker-enhancement/
 http://kyleolivo.com/dev/2016/08/21/lxd-and-cgroups/
@@ -254,6 +264,6 @@ https://sysdig.com/blog/monitoring-greedy-containers-part-1/
 
 https://lwn.net/Articles/676831/
 
-https://www.ibm.com/developerworks/community/blogs/powermeup/entry/Docker_Virtualization_and_Hypervisors?lang=en
+https://www.ibm.com/developerworks/community/blogs/powermeup/entry/Docker_Virtualization_and_Hypervisors?lang=en  
 
 [1]: images/modern_virtualization.png
