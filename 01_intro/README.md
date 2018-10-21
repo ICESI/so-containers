@@ -51,7 +51,7 @@ vi /home/jail/etc/passwd
 ```
 ```console
 root:x:0:0:root:/root:/bin/bash
-alice:x:1004:1004::/home/alice:/bin/bash
+alice:x:DONOTMODIFY:DONOTMODIFY::/home/alice:/bin/bash
 ```
 
 #### Usando chroot
@@ -74,7 +74,7 @@ systemctl enable sshd
 systemctl status sshd
 ```
 
-Realice una conexión remota como el usuario jane
+Realice una conexión remota como el usuario alice, puede tambien hacerlo desde afuera de la máquina
 ```console
 ssh alice@127.0.0.1
 ```
