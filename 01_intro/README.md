@@ -36,17 +36,17 @@ make install
 
 Configurar un chroot para un nuevo usuario
 ```console
-adduser jane
+adduser alice
 mkdir /home/jail
 chown root:root /home/jail
 jk_init -v -j /home/jail basicshell editors extendedshell netutils ssh sftp scp jk_lsh
-jk_jailuser -m -j /home/jail jane
+jk_jailuser -m -j /home/jail alice
 mkdir /home/jail/tmp
 chmod a+rwx /home/jail/tmp
 vi /home/jail/etc/passwd
 
 root:x:0:0:root:/root:/bin/bash
-jane:x:1004:1004::/home/jane:/bin/bash
+alice:x:1004:1004::/home/jane:/bin/bash
 
 ```
 
@@ -70,7 +70,7 @@ Reinicie el servicio de ssh
 
 Realice una conexión remota como el usuario jane
 ```
-# ssh jane@127.0.0.1
+# ssh alice@127.0.0.1
 ```
 
 Una vez haya accedido con ssh, observe los archivos y directorios en la raíz
