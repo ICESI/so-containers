@@ -54,6 +54,14 @@ root:x:0:0:root:/root:/bin/bash
 alice:x:DONOTMODIFY:DONOTMODIFY::/home/alice:/bin/bash
 ```
 
+Copiar el binario ps a chroot (cambiar /opt/jails/ por /home/jail/)
+```console
+sudo jk_cp /opt/jails/alice /bin/ps
+sudo jk_cp /opt/jails/alice /usr/bin/expr
+mkdir /opt/jails/username/proc
+mount -t proc proc /opt/jails/alice/proc
+```
+
 #### Usando chroot
 
 Edite el archivo de configuración ssh para permitir conexiones remotas en la máquina donde creo el chroot
@@ -177,6 +185,7 @@ por fuera de ella. Cada jaula tiene su propio hostname y dirección IP. Es posib
 http://linuxpitstop.com/chroot-ssh-users-on-centos-7/  
 http://www.tldp.org/pub/Linux/docs/ldp-archived/system-admin-guide/translations/es/html/ch05s02.html  
 https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/devices.txt
-http://pentestmonkey.net/blog/chroot-breakout-perl
+http://pentestmonkey.net/blog/chroot-breakout-perl  
+https://www.getpagespeed.com/server-setup/jailkit
 
 https://www.freebsd.org/  
