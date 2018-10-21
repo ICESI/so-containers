@@ -43,20 +43,24 @@ jk_init -v -j /home/jail basicshell editors extendedshell netutils ssh sftp scp 
 jk_jailuser -m -j /home/jail alice
 mkdir /home/jail/tmp
 chmod a+rwx /home/jail/tmp
-vi /home/jail/etc/passwd
+```
 
+Editar el archivo de passwords
+```console
+vi /home/jail/etc/passwd
+```
+```console
 root:x:0:0:root:/root:/bin/bash
 alice:x:1004:1004::/home/alice:/bin/bash
-
 ```
 
 #### Usando chroot
 
-Edite el archivo de configuración ssh para permitir conexiones remotas
-```
+Edite el archivo de configuración ssh para permitir conexiones remotas en la máquina donde creo el chroot
+```console
 vi /etc/ssh/sshd_config
 ```
-```
+```console
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication yes
 #PermitEmptyPasswords no
@@ -64,13 +68,15 @@ PasswordAuthentication yes
 ```
 
 Reinicie el servicio de ssh
-```
-# systemctl restart sshd
+```console
+systemctl start sshd
+systemctl enable sshd
+systemctl status sshd
 ```
 
 Realice una conexión remota como el usuario jane
-```
-# ssh alice@127.0.0.1
+```console
+ssh alice@127.0.0.1
 ```
 
 Una vez haya accedido con ssh, observe los archivos y directorios en la raíz
