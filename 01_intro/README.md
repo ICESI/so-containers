@@ -23,9 +23,7 @@ La creación de un ambiente aislado con **chroot** implica varios pasos. En esta
 Es posible instalar el rpm de jailkit directamente, sin embargo a continuación se presentan los pasos para la instalación desde las fuentes
 
 ```console
-yum install gcc
-yum install wget -y
-yum install bzip2 -y
+yum install gcc make wget bzip2 -y
 cd /tmp
 wget http://repo.iotti.biz/CentOS/7/srpms/jailkit-2.17-1.el7.lux.1.src.rpm
 rpm2cpio jailkit-2.17-1.el7.lux.1.src.rpm | cpio -idmv
