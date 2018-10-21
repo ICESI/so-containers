@@ -46,7 +46,7 @@ chmod a+rwx /home/jail/tmp
 vi /home/jail/etc/passwd
 
 root:x:0:0:root:/root:/bin/bash
-alice:x:1004:1004::/home/jane:/bin/bash
+alice:x:1004:1004::/home/alice:/bin/bash
 
 ```
 
