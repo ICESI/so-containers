@@ -23,27 +23,33 @@ La creación de un ambiente aislado con **chroot** implica varios pasos. En esta
 Es posible instalar el rpm de jailkit directamente, sin embargo a continuación se presentan los pasos para la instalación desde las fuentes
 
 ```console
-# yum install wget -y
-# yum install bzip2 -y
-# cd /tmp
-# wget http://repo.iotti.biz/CentOS/7/srpms/jailkit-2.17-1.el7.lux.1.src.rpm
-# rpm2cpio jailkit-2.17-1.el7.lux.1.src.rpm | cpio -idmv
-# tar xvf jailkit-2.17.tar.bz2
-# cd jailkit-2.17/
-# ./configure
-# make
-# make install
+yum install gcc
+yum install wget -y
+yum install bzip2 -y
+cd /tmp
+wget http://repo.iotti.biz/CentOS/7/srpms/jailkit-2.17-1.el7.lux.1.src.rpm
+rpm2cpio jailkit-2.17-1.el7.lux.1.src.rpm | cpio -idmv
+tar xvf jailkit-2.17.tar.bz2
+cd jailkit-2.17/
+./configure
+make
+make install
+```
 
-# adduser jane
-# mkdir /home/jail
-# chown root:root /home/jail
-# jk_init -v -j /home/jail basicshell editors extendedshell netutils ssh sftp scp jk_lsh
-# jk_jailuser -m -j /home/jail jane
-# mkdir /home/jail/tmp
-# chmod a+rwx /home/jail/tmp
-# vi /home/jail/etc/passwd
+Configurar un chroot para un nuevo usuario
+```console
+adduser jane
+mkdir /home/jail
+chown root:root /home/jail
+jk_init -v -j /home/jail basicshell editors extendedshell netutils ssh sftp scp jk_lsh
+jk_jailuser -m -j /home/jail jane
+mkdir /home/jail/tmp
+chmod a+rwx /home/jail/tmp
+vi /home/jail/etc/passwd
+
 root:x:0:0:root:/root:/bin/bash
 jane:x:1004:1004::/home/jane:/bin/bash
+
 ```
 
 #### Usando chroot
