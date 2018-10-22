@@ -34,7 +34,7 @@ make
 make install
 ```
 
-Configurar un chroot para un nuevo usuario
+Configurar un chroot para un nuevo usuario (TODO: cambiar /home/jail/ por /opt/jails/alice )
 ```console
 adduser alice
 mkdir /home/jail
@@ -45,7 +45,7 @@ mkdir /home/jail/tmp
 chmod a+rwx /home/jail/tmp
 ```
 
-Editar el archivo de passwords
+Editar el archivo de passwords (TODO: cambiar /home/jail/ por /opt/jails/alice )
 ```console
 vi /home/jail/etc/passwd
 ```
@@ -54,12 +54,12 @@ root:x:0:0:root:/root:/bin/bash
 alice:x:DONOTMODIFY:DONOTMODIFY::/home/alice:/bin/bash
 ```
 
-Copiar el binario ps a chroot (cambiar /opt/jails/ por /home/jail/)
+Copiar el binario ps a chroot (TODO: cambiar /home/jail/ por /opt/jails/alice )
 ```console
-sudo jk_cp /opt/jails/alice /bin/ps
-sudo jk_cp /opt/jails/alice /usr/bin/expr
-mkdir /opt/jails/username/proc
-mount -t proc proc /opt/jails/alice/proc
+sudo jk_cp /home/jail/ /bin/ps
+sudo jk_cp /home/jail/ /usr/bin/expr
+mkdir /home/jail/proc
+mount -t proc proc /home/jail/proc
 ```
 
 #### Usando chroot
